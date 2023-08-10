@@ -31,6 +31,17 @@
         <input type="submit" value="Выбрать"/>
     </form>
 </div>
+<div th:if="${(brandsOperating==null) }">
+    <form th:method="PATCH" th:action="@{/brands/addoperating/{id}(id=${brand.getId()})}">
+        <label for="operating">Выберите оперативную память</label>
+        <select th:object="${operating}" th:field="*{id}" id="operating">
+            <option th:each="operating : ${operatingfees}" th:value="${operating.getId()}"
+                    th:text="${operating.getType()+' '+operating.getSize()+' Гб'}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
 
 <div th:if="${(brandCooler==null) }">
     <form th:method="PATCH" th:action="@{/brands/addcooler/{id}(id=${brand.getId()})}">
@@ -43,17 +54,7 @@
     </form>
 </div>
 
-<div th:if="${(brandsOperating==null) }">
-    <form th:method="PATCH" th:action="@{/brands/addoperating/{id}(id=${brand.getId()})}">
-         <label for="operating">Выберите оперативную память</label>
-        <select th:object="${operating}" th:field="*{id}" id="operating">
-            <option th:each="operating : ${operatingfees}" th:value="${operating.getId()}"
-                    th:text="${operating.getType()+' '+operating.getSize()+' Гб'}">
-            </option>
-        </select>
-        <input type="submit" value="Выбрать"/>
-    </form>
-</div>
+
 
 <div th:if="${(brandsMotherboarder==null) }">
     <form th:method="PATCH" th:action="@{/brands/addmotherboarder/{id}(id=${brand.getId()})}">
@@ -92,6 +93,7 @@
         <input type="submit" value="Выбрать заново"/>
     </form>
 </div>
+
 <div th:if="${(brandsMotherboarder!=null) }">
     <p th:text="${'Материнская плата '+brandsMotherboarder.getTitle()+', '+brandsMotherboarder.getRam()+' Гб'}"></p>
     <form th:method="PATCH" th:action="@{/brands/freemotherboarder/{id}(id=${brand.getId()})}">
