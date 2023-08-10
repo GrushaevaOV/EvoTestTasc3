@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show brand</title>
+</head>
+<body>
+<p th:text="${brand.getTitle()}">VALUE</p>
+
+<div th:if="${(brandsProcessor==null) }">
+    <p>Соберите системынй блок</p>
+    <form th:method="PATCH" th:action="@{/brands/addprocessor/{id}(id=${brand.getId()})}">
+        <label for="processor">Выберите процессор</label>
+        <select th:object="${processor}" th:field="*{id}" id="processor">
+            <option th:each="processor : ${processors}" th:value="${processor.getId()}"
+                    th:text="${processor.getTitleProcessor()}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
+
+<div th:if="${(brandsDisc==null) }">
+    <form th:method="PATCH" th:action="@{/brands/adddisc/{id}(id=${brand.getId()})}">
+        <label for="disc">Выберите жесткий диск</label>
+        <select th:object="${disc}" th:field="*{id}" id="disc">
+            <option th:each="disc : ${discs}" th:value="${disc.getId()}"
+                    th:text="${disc.getType()+', '+disc.getSize()+' Гб'}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
+
+<div th:if="${(brandCooler==null) }">
+    <form th:method="PATCH" th:action="@{/brands/addcooler/{id}(id=${brand.getId()})}">
+        <label for="cooler">Выберите кулер</label>
+        <select th:object="${cooler}" th:field="*{id}" id="cooler">
+            <option th:each="cooler : ${coolers}" th:value="${cooler.getId()}" th:text="${cooler.getType()}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
+
+<div th:if="${(brandsOperating==null) }">
+    <form th:method="PATCH" th:action="@{/brands/addoperating/{id}(id=${brand.getId()})}">
+         <label for="operating">Выберите оперативную память</label>
+        <select th:object="${operating}" th:field="*{id}" id="operating">
+            <option th:each="operating : ${operatingfees}" th:value="${operating.getId()}"
+                    th:text="${operating.getType()+' '+operating.getSize()+' Гб'}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
+
+<div th:if="${(brandsMotherboarder==null) }">
+    <form th:method="PATCH" th:action="@{/brands/addmotherboarder/{id}(id=${brand.getId()})}">
+        <label for="motherboarder">Выберите материнскую плату</label>
+        <select th:object="${motherboarder}" th:field="*{id}" id="motherboarder">
+            <option th:each="motherboarder : ${motherboarders}" th:value="${motherboarder.getId()}" th:text="${motherboarder.getTitle()+' '+motherboarder.getRam()+' '}">
+            </option>
+        </select>
+        <input type="submit" value="Выбрать"/>
+    </form>
+</div>
+
+
+<div th:if="${(brandsProcessor!=null) }">
+    <p> Системный блок состоит из :</p>
+    <p th:text="${'Процессор '+brandsProcessor.getTitleProcessor()+', '+brandsProcessor.getCore()+' ядер'}"></p>
+    <form th:method="PATCH" th:action="@{/brands/freeprocessor/{id}(id=${brand.getId()})}">
+        <input type="submit" value="Выбрать заново"/>
+    </form>
+</div>
+<div th:if="${(brandsDisc!=null) }">
+    <p th:text="${'Жесткий диск '+brandsDisc.getType()+', '+brandsDisc.getSize()+' Гб'}"></p>
+    <form th:method="PATCH" th:action="@{/brands/freedisc/{id}(id=${brand.getId()})}">
+        <input type="submit" value="Выбрать заново"/>
+    </form>
+</div>
+<div th:if="${(brandsOperating!=null) }">
+    <p th:text="${'Оперативная память '+ brandsOperating.getType()+' '+brandsOperating.getSize()+' Гб'}"></p>
+    <form th:method="PATCH" th:action="@{/brands/freeoperating/{id}(id=${brand.getId()})}">
+        <input type="submit" value="Выбрать заново"/>
+    </form>
+</div>
+<div th:if="${(brandCooler!=null) }">
+    <p th:text="${'Кулер '+ brandCooler.getType()}"></p>
+    <form th:method="PATCH" th:action="@{/brands/freecooler/{id}(id=${brand.getId()})}">
+        <input type="submit" value="Выбрать заново"/>
+    </form>
+</div>
+<div th:if="${(brandsMotherboarder!=null) }">
+    <p th:text="${'Материнская плата '+brandsMotherboarder.getTitle()+', '+brandsMotherboarder.getRam()+' Гб'}"></p>
+    <form th:method="PATCH" th:action="@{/brands/freemotherboarder/{id}(id=${brand.getId()})}">
+        <input type="submit" value="Выбрать заново"/>
+    </form>
+</div>
+</br>
+<form th:method="PATCH" th:action="@{/brands/freebrandonindex}">
+    <input type="submit" value="На главную"/>
+</form>
+</body>
+</html>
