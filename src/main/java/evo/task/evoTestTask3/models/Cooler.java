@@ -3,7 +3,7 @@ package evo.task.evoTestTask3.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "kulers")
+@Table(name = "coolers")
 public class Cooler {
     @Id
     @Column(name = "id")
@@ -13,7 +13,7 @@ public class Cooler {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "kuler_choice")
+    @Column(name = "coolers_choice")
     private boolean coolerChoice;
 
     @ManyToOne
